@@ -1,4 +1,5 @@
 dist
+build
 static
 src
-test/unit/coverage
+test/unit

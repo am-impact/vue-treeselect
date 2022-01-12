@@ -1679,7 +1679,8 @@ export default {
                     const isDisabled =
                         !!node.isDisabled ||
                         (!this.flat && !isRootNode && parentNode.isDisabled);
-                    const isHidden = !!node.isHidden;
+                    const isHidden =
+                        !!node.isHidden || (!isRootNode && parentNode.isHidden);
                     const isNew = !!node.isNew;
                     const lowerCased = this.matchKeys.reduce(
                         (prev, key) => ({
