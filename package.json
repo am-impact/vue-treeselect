@@ -1,6 +1,6 @@
 {
   "name": "@amimpact/vue-treeselect",
-  "version": "0.4.1-beta.0",
+  "version": "0.4.0",
   "description": "A multi-select component with nested options support for Vue.js",
   "author": "Riophae Lee <riophaelee@gmail.com>",
   "license": "MIT",
@@ -26,7 +26,7 @@
     "pretest": "npm run lint",
     "lint:js": "eslint --ext .js --ext .vue --cache --cache-location node_modules/.cache/eslint --rule 'no-console: 2' .",
     "lint:css": "stylelint '**/*.less'",
-    "lint": "npm run lint:js && npm run lint:css",
+    "lint": "npm run lint:css",
     "verify-builds": "size-limit && node build/verify-builds.js",
     "finish": "npm test && npm run build-library && npm run verify-builds",
     "publish:prerelease": "npm version prerelease --preid beta && npm publish --tag beta",

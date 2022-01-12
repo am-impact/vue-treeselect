@@ -1,3 +1,4 @@
 dist
 static
+src
 test/unit/coverage
