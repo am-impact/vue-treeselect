@@ -91,15 +91,13 @@ const Option = {
                 };
 
                 return (
-                    <div class="vue-treeselect__option-arrow-container">
-                        <button
-                            class="vue-treeselect__option-arrow-button"
-                            onMousedown={this.handleMouseDownOnArrow}
-                        >
-                            <transition {...transitionProps}>
-                                <ArrowIcon class={arrowClass} />
-                            </transition>
-                        </button>
+                    <div
+                        class="vue-treeselect__option-arrow-container"
+                        onMousedown={this.handleMouseDownOnArrow}
+                    >
+                        <transition {...transitionProps}>
+                            <ArrowIcon class={arrowClass} />
+                        </transition>
                     </div>
                 );
             }
@@ -197,12 +195,12 @@ const Option = {
                 });
 
             return (
-                <button class={labelClassName}>
+                <label class={labelClassName}>
                     {node.label}
                     {shouldShowCount && (
                         <span class={countClassName}>({count})</span>
                     )}
-                </button>
+                </label>
             );
         },
 
