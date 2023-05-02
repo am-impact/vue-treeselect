@@ -239,6 +239,9 @@ export default {
 
             return (
                 <div class="vue-treeselect__input-container" {...props}>
+                    <label for={`vue-treeselect-input-${instance.instanceId}`} class="visuallyhidden">
+                        {instance.placeholder}
+                    </label>
                     {children}
                 </div>
             );
@@ -257,6 +260,7 @@ export default {
                     aria-autocomplete="both"
                     aria-expanded={instance.menu?.isOpen ? 'true' : 'false'}
                     aria-controls={`combobox-${instance.instanceId}`}
+                    id={`vue-treeselect-input-${instance.instanceId}`}
                     tabIndex={instance.tabIndex}
                     required={instance.required && !instance.hasValue}
                     value={this.value}
