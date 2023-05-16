@@ -4,6 +4,7 @@ import { MIN_INPUT_WIDTH, KEY_CODES, INPUT_DEBOUNCE_DELAY } from '../constants';
 
 const keysThatRequireMenuBeingOpen = [
     KEY_CODES.ENTER,
+    KEY_CODES.SPACE,
     KEY_CODES.END,
     KEY_CODES.HOME,
     KEY_CODES.ARROW_LEFT,
@@ -131,6 +132,14 @@ export default {
                 case KEY_CODES.ENTER: {
                     evt.preventDefault();
                     if (instance.menu.current === null) return;
+                    const current = instance.getNode(instance.menu.current);
+                    if (current.isBranch && instance.disableBranchNodes) return;
+                    instance.select(current);
+                    break;
+                }
+                case KEY_CODES.SPACE: {
+                    if (instance.menu.current === null) return;
+                    evt.preventDefault();
                     const current = instance.getNode(instance.menu.current);
                     if (current.isBranch && instance.disableBranchNodes) return;
                     instance.select(current);
