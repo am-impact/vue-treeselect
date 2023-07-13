@@ -109,9 +109,9 @@ const Option = {
 
         renderLabelContainer(children) {
             return (
-                <div class="vue-treeselect__label-container" onMousedown={this.handleMouseDownOnLabelContainer}>
+                <label class="vue-treeselect__label-container" onMousedown={this.handleMouseDownOnLabelContainer}>
                     {children}
-                </div>
+                </label>
             );
         },
 
@@ -139,7 +139,7 @@ const Option = {
             if (!minusMark) minusMark = <span class="vue-treeselect__minus-mark" />;
 
             return (
-                <span class={checkboxClass}>
+                <span class={checkboxClass} aria-checked={checkedState === CHECKED ? 'true' : 'false'} role="checkbox">
                     {checkMark}
                     {minusMark}
                 </span>
@@ -170,10 +170,10 @@ const Option = {
                 });
 
             return (
-                <label class={labelClassName}>
+                <span class={labelClassName}>
                     {node.label}
                     {shouldShowCount && <span class={countClassName}>({count})</span>}
-                </label>
+                </span>
             );
         },
 
