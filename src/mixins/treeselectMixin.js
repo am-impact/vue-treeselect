@@ -1,4 +1,4 @@
-import fuzzysearch from "fuzzysearch";
+import fuzzysearch from 'fuzzysearch';
 
 import {
     warning,
@@ -15,7 +15,7 @@ import {
     includes,
     find,
     removeFromArray,
-} from "../utils";
+} from '../utils';
 
 import {
     NO_PARENT_NODE,
@@ -36,7 +36,7 @@ import {
     ORDER_SELECTED,
     LEVEL,
     INDEX,
-} from "../constants";
+} from '../constants';
 
 function sortValueByIndex(a, b) {
     let i = 0;
@@ -56,21 +56,19 @@ function createAsyncOptionsStates() {
     return {
         isLoaded: false,
         isLoading: false,
-        loadingError: "",
+        loadingError: '',
     };
 }
 
 function stringifyOptionPropValue(value) {
-    if (typeof value === "string") return value;
-    if (typeof value === "number" && !isNaN(value)) return value + "";
+    if (typeof value === 'string') return value;
+    if (typeof value === 'number' && !isNaN(value)) return value + '';
     // istanbul ignore next
-    return "";
+    return '';
 }
 
 function match(enableFuzzyMatch, needle, haystack) {
-    return enableFuzzyMatch
-        ? fuzzysearch(needle, haystack)
-        : includes(haystack, needle);
+    return enableFuzzyMatch ? fuzzysearch(needle, haystack) : includes(haystack, needle);
 }
 
 function getErrorMessage(err) {
@@ -225,7 +223,7 @@ export default {
          */
         clearAllText: {
             type: String,
-            default: "Clear all",
+            default: 'Clear all',
         },
 
         /**
@@ -243,7 +241,7 @@ export default {
          */
         clearValueText: {
             type: String,
-            default: "Clear value",
+            default: 'Clear value',
         },
 
         /**
@@ -286,7 +284,7 @@ export default {
          */
         delimiter: {
             type: String,
-            default: ",",
+            default: ',',
         },
 
         /**
@@ -378,7 +376,7 @@ export default {
          */
         loadingText: {
             type: String,
-            default: "Loading...",
+            default: 'Loading...',
         },
 
         /**
@@ -394,7 +392,7 @@ export default {
          */
         matchKeys: {
             type: Array,
-            default: constant(["label"]),
+            default: constant(['label']),
         },
 
         /**
@@ -425,7 +423,7 @@ export default {
          */
         noChildrenText: {
             type: String,
-            default: "No sub-options.",
+            default: 'No sub-options.',
         },
 
         /**
@@ -433,7 +431,7 @@ export default {
          */
         noOptionsText: {
             type: String,
-            default: "No options available.",
+            default: 'No options available.',
         },
 
         /**
@@ -441,7 +439,7 @@ export default {
          */
         noResultsText: {
             type: String,
-            default: "No results found...",
+            default: 'No results found...',
         },
 
         /**
@@ -467,15 +465,9 @@ export default {
          */
         openDirection: {
             type: String,
-            default: "auto",
+            default: 'auto',
             validator(value) {
-                const acceptableValues = [
-                    "auto",
-                    "top",
-                    "bottom",
-                    "above",
-                    "below",
-                ];
+                const acceptableValues = ['auto', 'top', 'bottom', 'above', 'below'];
                 return includes(acceptableValues, value);
             },
         },
@@ -509,7 +501,7 @@ export default {
          */
         placeholder: {
             type: String,
-            default: "Select...",
+            default: 'Select...',
         },
 
         /**
@@ -525,7 +517,7 @@ export default {
          */
         retryText: {
             type: String,
-            default: "Retry?",
+            default: 'Retry?',
         },
 
         /**
@@ -533,7 +525,7 @@ export default {
          */
         retryTitle: {
             type: String,
-            default: "Click to retry",
+            default: 'Click to retry',
         },
 
         /**
@@ -557,7 +549,7 @@ export default {
          */
         searchPromptText: {
             type: String,
-            default: "Type to search...",
+            default: 'Type to search...',
         },
 
         /**
@@ -662,7 +654,7 @@ export default {
          */
         valueFormat: {
             type: String,
-            default: "id",
+            default: 'id',
         },
 
         /**
@@ -680,7 +672,7 @@ export default {
                 // Is the control focused?
                 isFocused: false,
                 // User entered search query - value of the input.
-                searchQuery: "",
+                searchQuery: '',
             },
 
             menu: {
@@ -691,7 +683,7 @@ export default {
                 // The scroll position before last menu closing.
                 lastScrollPosition: 0,
                 // Which direction to open the menu.
-                placement: "bottom",
+                placement: 'bottom',
             },
 
             forest: {
@@ -775,13 +767,9 @@ export default {
             }
 
             if (this.sortValueBy === LEVEL) {
-                internalValue.sort((a, b) =>
-                    sortValueByLevel(this.getNode(a), this.getNode(b))
-                );
+                internalValue.sort((a, b) => sortValueByLevel(this.getNode(a), this.getNode(b)));
             } else if (this.sortValueBy === INDEX) {
-                internalValue.sort((a, b) =>
-                    sortValueByIndex(this.getNode(a), this.getNode(b))
-                );
+                internalValue.sort((a, b) => sortValueByIndex(this.getNode(a), this.getNode(b)));
             }
 
             return internalValue;
@@ -812,10 +800,7 @@ export default {
             const visibleOptionIds = [];
 
             this.traverseAllNodesByIndex((node) => {
-                if (
-                    !this.localSearch.active ||
-                    this.shouldOptionBeIncludedInSearchResult(node)
-                ) {
+                if (!this.localSearch.active || this.shouldOptionBeIncludedInSearchResult(node)) {
                     visibleOptionIds.push(node.id);
                 }
                 // Skip the traversal of descendants of a branch node if it's not expanded.
@@ -841,7 +826,7 @@ export default {
             // Vue doesn't allow setting default prop value based on another prop value.
             // So use computed property as a workaround.
             // https://github.com/vuejs/vue/issues/6358
-            return typeof this.showCountOnSearch === "boolean"
+            return typeof this.showCountOnSearch === 'boolean'
                 ? this.showCountOnSearch
                 : this.showCount;
         },
@@ -850,9 +835,7 @@ export default {
          * @type {boolean}
          */
         hasBranchNodes() {
-            return this.forest.normalizedOptions.some(
-                (rootNode) => rootNode.isBranch
-            );
+            return this.forest.normalizedOptions.some((rootNode) => rootNode.isBranch);
         },
         shouldFlattenOptions() {
             return this.localSearch.active && this.flattenSearchResults;
@@ -873,8 +856,7 @@ export default {
         disabled(newValue) {
             // force close the menu after disabling the control
             if (newValue && this.menu.isOpen) this.closeMenu();
-            else if (!newValue && !this.menu.isOpen && this.alwaysOpen)
-                this.openMenu();
+            else if (!newValue && !this.menu.isOpen && this.alwaysOpen) this.openMenu();
         },
 
         flat() {
@@ -886,8 +868,7 @@ export default {
             // #122
             // Vue would trigger this watcher when `newValue` and `oldValue` are shallow-equal.
             // We emit the `input` event only when the value actually changes.
-            if (hasChanged)
-                this.$emit("input", this.getValue(), this.getInstanceId());
+            if (hasChanged) this.$emit('input', this.getValue(), this.getInstanceId());
         },
 
         matchKeys() {
@@ -912,18 +893,14 @@ export default {
             immediate: true,
         },
 
-        "trigger.searchQuery"() {
+        'trigger.searchQuery'() {
             if (this.async) {
                 this.handleRemoteSearch();
             } else {
                 this.handleLocalSearch();
             }
 
-            this.$emit(
-                "search-change",
-                this.trigger.searchQuery,
-                this.getInstanceId()
-            );
+            this.$emit('search-change', this.trigger.searchQuery, this.getInstanceId());
         },
 
         value() {
@@ -937,38 +914,36 @@ export default {
         verifyProps() {
             warning(
                 () => (this.async ? this.searchable : true),
-                () =>
-                    'For async search mode, the value of "searchable" prop must be true.'
+                () => 'For async search mode, the value of "searchable" prop must be true.',
             );
 
             if (this.options == null && !this.loadOptions) {
                 warning(
                     () => false,
                     () =>
-                        'Are you meant to dynamically load options? You need to use "loadOptions" prop.'
+                        'Are you meant to dynamically load options? You need to use "loadOptions" prop.',
                 );
             }
 
             if (this.flat) {
                 warning(
                     () => this.multiple,
-                    () =>
-                        'You are using flat mode. But you forgot to add "multiple=true"?'
+                    () => 'You are using flat mode. But you forgot to add "multiple=true"?',
                 );
             }
 
             if (!this.flat) {
                 const propNames = [
-                    "autoSelectAncestors",
-                    "autoSelectDescendants",
-                    "autoDeselectAncestors",
-                    "autoDeselectDescendants",
+                    'autoSelectAncestors',
+                    'autoSelectDescendants',
+                    'autoDeselectAncestors',
+                    'autoDeselectDescendants',
                 ];
 
                 propNames.forEach((propName) => {
                     warning(
                         () => !this[propName],
-                        () => `"${propName}" only applies to flat mode.`
+                        () => `"${propName}" only applies to flat mode.`,
                     );
                 });
             }
@@ -979,9 +954,7 @@ export default {
         },
 
         initialize() {
-            const options = this.async
-                ? this.getRemoteSearchEntry().options
-                : this.options;
+            const options = this.async ? this.getRemoteSearchEntry().options : this.options;
 
             if (Array.isArray(options)) {
                 // In case we are re-initializing options, keep the old state tree temporarily.
@@ -991,7 +964,7 @@ export default {
                 this.forest.normalizedOptions = this.normalize(
                     NO_PARENT_NODE,
                     options,
-                    prevNodeMap
+                    prevNodeMap,
                 );
                 // Cases that need fixing `selectedNodeIds`:
                 //   1) Children options of a checked node have been delayed loaded,
@@ -1010,22 +983,18 @@ export default {
         },
 
         getValue() {
-            if (this.valueFormat === "id") {
-                return this.multiple
-                    ? this.internalValue.slice()
-                    : this.internalValue[0];
+            if (this.valueFormat === 'id') {
+                return this.multiple ? this.internalValue.slice() : this.internalValue[0];
             }
 
-            const rawNodes = this.internalValue.map(
-                (id) => this.getNode(id).raw
-            );
+            const rawNodes = this.internalValue.map((id) => this.getNode(id).raw);
             return this.multiple ? rawNodes : rawNodes[0];
         },
 
         getNode(nodeId) {
             warning(
                 () => nodeId != null,
-                () => `Invalid node id: ${nodeId}`
+                () => `Invalid node id: ${nodeId}`,
             );
 
             if (nodeId == null) return null;
@@ -1041,8 +1010,7 @@ export default {
             // When the real data is loaded, we'll override this fake node.
 
             const raw = this.extractNodeFromValue(id);
-            const label =
-                this.enhancedNormalizer(raw).label || `${id} (unknown)`;
+            const label = this.enhancedNormalizer(raw).label || `${id} (unknown)`;
             const fallbackNode = {
                 id,
                 label,
@@ -1066,7 +1034,7 @@ export default {
         extractCheckedNodeIdsFromValue() {
             if (this.value == null) return [];
 
-            if (this.valueFormat === "id") {
+            if (this.valueFormat === 'id') {
                 return this.multiple ? this.value.slice() : [this.value];
             }
 
@@ -1078,7 +1046,7 @@ export default {
         extractNodeFromValue(id) {
             const defaultNode = { id };
 
-            if (this.valueFormat === "id") {
+            if (this.valueFormat === 'id') {
                 return defaultNode;
             }
 
@@ -1091,7 +1059,7 @@ export default {
                 : [];
             const matched = find(
                 valueArray,
-                (node) => node && this.enhancedNormalizer(node).id === id
+                (node) => node && this.enhancedNormalizer(node).id === id,
             );
 
             return matched || defaultNode;
@@ -1126,10 +1094,8 @@ export default {
                     nextSelectedNodeIds.push(nodeId);
                     if (node.isRootNode) continue;
                     if (!(node.parentNode.id in map))
-                        map[node.parentNode.id] =
-                            node.parentNode.children.length;
-                    if (--map[node.parentNode.id] === 0)
-                        queue.push(node.parentNode.id);
+                        map[node.parentNode.id] = node.parentNode.children.length;
+                    if (--map[node.parentNode.id] === 0) queue.push(node.parentNode.id);
                 }
             } else if (this.valueConsistsOf === ALL_WITH_INDETERMINATE) {
                 const map = createMap();
@@ -1143,17 +1109,12 @@ export default {
                     nextSelectedNodeIds.push(nodeId);
                     if (node.isRootNode) continue;
                     if (!(node.parentNode.id in map))
-                        map[node.parentNode.id] =
-                            node.parentNode.children.length;
-                    if (--map[node.parentNode.id] === 0)
-                        queue.push(node.parentNode.id);
+                        map[node.parentNode.id] = node.parentNode.children.length;
+                    if (--map[node.parentNode.id] === 0) queue.push(node.parentNode.id);
                 }
             }
 
-            const hasChanged = quickDiff(
-                this.forest.selectedNodeIds,
-                nextSelectedNodeIds
-            );
+            const hasChanged = quickDiff(this.forest.selectedNodeIds, nextSelectedNodeIds);
             // If `nextSelectedNodeIds` doesn't actually differ from old `selectedNodeIds`,
             // we don't make the assignment to avoid triggering its watchers which may cause
             // unnecessary calculations.
@@ -1225,22 +1186,14 @@ export default {
 
         toggleClickOutsideEvent(enabled) {
             if (enabled) {
-                document.addEventListener(
-                    "mousedown",
-                    this.handleClickOutside,
-                    false
-                );
+                document.addEventListener('mousedown', this.handleClickOutside, false);
             } else {
-                document.removeEventListener(
-                    "mousedown",
-                    this.handleClickOutside,
-                    false
-                );
+                document.removeEventListener('mousedown', this.handleClickOutside, false);
             }
         },
 
         getValueContainer() {
-            return this.$refs.control.$refs["value-container"];
+            return this.$refs.control.$refs['value-container'];
         },
 
         getInput() {
@@ -1261,8 +1214,7 @@ export default {
 
             if (this.disabled) return;
 
-            const isClickedOnValueContainer =
-                this.getValueContainer().$el.contains(evt.target);
+            const isClickedOnValueContainer = this.getValueContainer().$el.contains(evt.target);
             if (
                 isClickedOnValueContainer &&
                 !this.menu.isOpen &&
@@ -1283,10 +1235,7 @@ export default {
 
         handleClickOutside(evt) {
             // istanbul ignore else
-            if (
-                this.$refs.wrapper &&
-                !this.$refs.wrapper.contains(evt.target)
-            ) {
+            if (this.$refs.wrapper && !this.$refs.wrapper.contains(evt.target)) {
                 this.blurInput();
                 this.closeMenu();
             }
@@ -1322,57 +1271,43 @@ export default {
                 }
             });
 
-            const lowerCasedSearchQuery = searchQuery
-                .trim()
-                .toLocaleLowerCase();
-            const splitSearchQuery = lowerCasedSearchQuery
-                .replace(/\s+/g, " ")
-                .split(" ");
+            const lowerCasedSearchQuery = searchQuery.trim().toLocaleLowerCase();
+            const splitSearchQuery = lowerCasedSearchQuery.replace(/\s+/g, ' ').split(' ');
             this.traverseAllNodesDFS((node) => {
                 if (this.searchNested && splitSearchQuery.length > 1) {
                     node.isMatched = splitSearchQuery.every((filterValue) =>
-                        match(false, filterValue, node.nestedSearchLabel)
+                        match(false, filterValue, node.nestedSearchLabel),
                     );
                 } else {
                     node.isMatched = this.matchKeys.some((matchKey) =>
                         match(
                             !this.disableFuzzyMatching,
                             lowerCasedSearchQuery,
-                            node.lowerCased[matchKey]
-                        )
+                            node.lowerCased[matchKey],
+                        ),
                     );
                 }
 
                 if (node.isMatched) {
                     this.localSearch.noResults = false;
                     node.ancestors.forEach(
-                        (ancestor) =>
-                            this.localSearch.countMap[ancestor.id][
-                                ALL_DESCENDANTS
-                            ]++
+                        (ancestor) => this.localSearch.countMap[ancestor.id][ALL_DESCENDANTS]++,
                     );
                     if (node.isLeaf)
                         node.ancestors.forEach(
                             (ancestor) =>
-                                this.localSearch.countMap[ancestor.id][
-                                    LEAF_DESCENDANTS
-                                ]++
+                                this.localSearch.countMap[ancestor.id][LEAF_DESCENDANTS]++,
                         );
                     if (node.parentNode !== NO_PARENT_NODE) {
-                        this.localSearch.countMap[node.parentNode.id][
-                            ALL_CHILDREN
-                        ] += 1;
+                        this.localSearch.countMap[node.parentNode.id][ALL_CHILDREN] += 1;
                         // istanbul ignore else
                         if (node.isLeaf)
-                            this.localSearch.countMap[node.parentNode.id][
-                                LEAF_CHILDREN
-                            ] += 1;
+                            this.localSearch.countMap[node.parentNode.id][LEAF_CHILDREN] += 1;
                     }
                 }
 
                 if (
-                    (node.isMatched ||
-                        (node.isBranch && node.isExpandedOnSearch)) &&
+                    (node.isMatched || (node.isBranch && node.isExpandedOnSearch)) &&
                     node.parentNode !== NO_PARENT_NODE
                 ) {
                     node.parentNode.isExpandedOnSearch = true;
@@ -1391,7 +1326,7 @@ export default {
                 this.resetHighlightedOptionWhenNecessary(true);
             };
 
-            if ((searchQuery === "" || this.cacheOptions) && entry.isLoaded) {
+            if ((searchQuery === '' || this.cacheOptions) && entry.isLoaded) {
                 return done();
             }
 
@@ -1404,7 +1339,7 @@ export default {
                 start: () => {
                     entry.isLoading = true;
                     entry.isLoaded = false;
-                    entry.loadingError = "";
+                    entry.loadingError = '';
                 },
                 succeed: (options) => {
                     entry.isLoaded = true;
@@ -1434,13 +1369,12 @@ export default {
                 () => entry.options,
                 () => {
                     // TODO: potential redundant re-initialization.
-                    if (this.trigger.searchQuery === searchQuery)
-                        this.initialize();
+                    if (this.trigger.searchQuery === searchQuery) this.initialize();
                 },
-                { deep: true }
+                { deep: true },
             );
 
-            if (searchQuery === "") {
+            if (searchQuery === '') {
                 if (Array.isArray(this.defaultOptions)) {
                     entry.options = this.defaultOptions;
                     entry.isLoaded = true;
@@ -1459,34 +1393,24 @@ export default {
         },
 
         shouldExpand(node) {
-            return this.localSearch.active
-                ? node.isExpandedOnSearch
-                : node.isExpanded;
+            return this.localSearch.active ? node.isExpandedOnSearch : node.isExpanded;
         },
 
         shouldOptionBeIncludedInSearchResult(node) {
             // 1) This option is matched.
             if (node.isMatched) return true;
             // 2) This option is not matched, but has matched descendant(s).
-            if (
-                node.isBranch &&
-                node.hasMatchedDescendants &&
-                !this.flattenSearchResults
-            )
+            if (node.isBranch && node.hasMatchedDescendants && !this.flattenSearchResults)
                 return true;
             // 3) This option's parent has no matched descendants,
             //    but after being expanded, all its children should be shown.
-            if (!node.isRootNode && node.parentNode.showAllChildrenOnSearch)
-                return true;
+            if (!node.isRootNode && node.parentNode.showAllChildrenOnSearch) return true;
             // 4) The default case.
             return false;
         },
 
         shouldShowOptionInMenu(node) {
-            if (
-                this.localSearch.active &&
-                !this.shouldOptionBeIncludedInSearchResult(node)
-            ) {
+            if (this.localSearch.active && !this.shouldOptionBeIncludedInSearchResult(node)) {
                 return false;
             }
             return true;
@@ -1497,17 +1421,20 @@ export default {
         },
 
         getMenu() {
-            const ref = this.appendToBody
-                ? this.$refs.portal.portalTarget
-                : this;
+            const ref = this.appendToBody ? this.$refs.portal.portalTarget : this;
             const $menu = ref.$refs.menu.$refs.menu;
-            return $menu && $menu.nodeName !== "#comment" ? $menu : null;
+            return $menu && $menu.nodeName !== '#comment' ? $menu : null;
         },
 
         setCurrentHighlightedOption(node, scroll = true) {
             const prev = this.menu.current;
             if (prev != null && prev in this.forest.nodeMap) {
                 this.forest.nodeMap[prev].isHighlighted = false;
+            }
+
+            if (!node) {
+                this.menu.current = null;
+                return;
             }
 
             this.menu.current = node.id;
@@ -1517,7 +1444,7 @@ export default {
                 const scrollToOption = () => {
                     const $menu = this.getMenu();
                     const $option = $menu.querySelector(
-                        `.vue-treeselect__option[data-id="${node.id}"]`
+                        `.vue-treeselect__option[data-id="${node.id}"]`,
                     );
                     if ($option) scrollIntoView($menu, $option);
                 };
@@ -1533,22 +1460,26 @@ export default {
         },
 
         resetHighlightedOptionWhenNecessary(forceReset = false) {
-            const { current } = this.menu;
+            // Niet meer standaard de eerste optie selecteren
+            return;
 
-            if (
-                forceReset ||
-                current == null ||
-                !(current in this.forest.nodeMap) ||
-                !this.shouldShowOptionInMenu(this.getNode(current))
-            ) {
-                this.highlightFirstOption();
-            }
+            // const { current } = this.menu;
+
+            // if (
+            //     forceReset ||
+            //     current == null ||
+            //     !(current in this.forest.nodeMap) ||
+            //     !this.shouldShowOptionInMenu(this.getNode(current))
+            // ) {
+            //     this.highlightFirstOption();
+            // }
         },
 
         highlightFirstOption() {
             if (!this.hasVisibleOptions) return;
 
             const first = this.visibleOptionIds[0];
+
             this.setCurrentHighlightedOption(this.getNode(first));
         },
 
@@ -1556,42 +1487,49 @@ export default {
             if (!this.hasVisibleOptions) return;
 
             const prev = this.visibleOptionIds.indexOf(this.menu.current) - 1;
-            if (prev === -1) return this.highlightLastOption();
-            this.setCurrentHighlightedOption(
-                this.getNode(this.visibleOptionIds[prev])
-            );
+
+            if (prev === -1) {
+                this.setCurrentHighlightedOption(null);
+
+                return;
+                // return this.highlightLastOption();
+            }
+            this.setCurrentHighlightedOption(this.getNode(this.visibleOptionIds[prev]));
         },
 
         highlightNextOption() {
             if (!this.hasVisibleOptions) return;
 
             const next = this.visibleOptionIds.indexOf(this.menu.current) + 1;
-            if (next === this.visibleOptionIds.length)
-                return this.highlightFirstOption();
-            this.setCurrentHighlightedOption(
-                this.getNode(this.visibleOptionIds[next])
-            );
+
+            if (next === this.visibleOptionIds.length) {
+                this.setCurrentHighlightedOption(null);
+
+                return;
+                // return this.highlightFirstOption();
+            }
+            this.setCurrentHighlightedOption(this.getNode(this.visibleOptionIds[next]));
         },
 
         highlightLastOption() {
             if (!this.hasVisibleOptions) return;
 
             const last = getLast(this.visibleOptionIds);
+
             this.setCurrentHighlightedOption(this.getNode(last));
         },
 
         resetSearchQuery() {
-            this.trigger.searchQuery = "";
+            this.trigger.searchQuery = '';
         },
 
         closeMenu() {
-            if (!this.menu.isOpen || (!this.disabled && this.alwaysOpen))
-                return;
+            if (!this.menu.isOpen || (!this.disabled && this.alwaysOpen)) return;
             this.saveMenuScrollPosition();
             this.menu.isOpen = false;
             this.toggleClickOutsideEvent(false);
             this.resetSearchQuery();
-            this.$emit("close", this.getValue(), this.getInstanceId());
+            this.$emit('close', this.getValue(), this.getInstanceId());
         },
 
         openMenu() {
@@ -1601,7 +1539,7 @@ export default {
             this.$nextTick(this.restoreMenuScrollPosition);
             if (!this.options && !this.async) this.loadRootOptions();
             this.toggleClickOutsideEvent(true);
-            this.$emit("open", this.getInstanceId());
+            this.$emit('open', this.getInstanceId());
         },
 
         toggleMenu() {
@@ -1646,8 +1584,7 @@ export default {
                     if (!this.flat && !this.disableBranchNodes) {
                         selectedNode.ancestors.forEach((ancestorNode) => {
                             if (!this.isSelected(ancestorNode)) {
-                                checkedStateMap[ancestorNode.id] =
-                                    INDETERMINATE;
+                                checkedStateMap[ancestorNode.id] = INDETERMINATE;
                             }
                         });
                     }
@@ -1673,84 +1610,69 @@ export default {
                     const { id, label, children, isDefaultExpanded } = node;
                     const isRootNode = parentNode === NO_PARENT_NODE;
                     const level = isRootNode ? 0 : parentNode.level + 1;
-                    const isBranch =
-                        Array.isArray(children) || children === null;
+                    const isBranch = Array.isArray(children) || children === null;
                     const isLeaf = !isBranch;
                     const isDisabled =
-                        !!node.isDisabled ||
-                        (!this.flat && !isRootNode && parentNode.isDisabled);
-                    const isHidden =
-                        !!node.isHidden || (!isRootNode && parentNode.isHidden);
+                        !!node.isDisabled || (!this.flat && !isRootNode && parentNode.isDisabled);
+                    const isHidden = !!node.isHidden || (!isRootNode && parentNode.isHidden);
                     const isNew = !!node.isNew;
                     const lowerCased = this.matchKeys.reduce(
                         (prev, key) => ({
                             ...prev,
-                            [key]: stringifyOptionPropValue(
-                                node[key]
-                            ).toLocaleLowerCase(),
+                            [key]: stringifyOptionPropValue(node[key]).toLocaleLowerCase(),
                         }),
-                        {}
+                        {},
                     );
                     const nestedSearchLabel = isRootNode
                         ? lowerCased.label
-                        : parentNode.nestedSearchLabel + " " + lowerCased.label;
+                        : parentNode.nestedSearchLabel + ' ' + lowerCased.label;
 
-                    const normalized = this.$set(
-                        this.forest.nodeMap,
-                        id,
-                        createMap()
-                    );
-                    this.$set(normalized, "id", id);
-                    this.$set(normalized, "label", label);
-                    this.$set(normalized, "level", level);
+                    const normalized = this.$set(this.forest.nodeMap, id, createMap());
+                    this.$set(normalized, 'id', id);
+                    this.$set(normalized, 'label', label);
+                    this.$set(normalized, 'level', level);
                     this.$set(
                         normalized,
-                        "ancestors",
-                        isRootNode
-                            ? []
-                            : [parentNode].concat(parentNode.ancestors)
+                        'ancestors',
+                        isRootNode ? [] : [parentNode].concat(parentNode.ancestors),
                     );
                     this.$set(
                         normalized,
-                        "index",
-                        (isRootNode ? [] : parentNode.index).concat(index)
+                        'index',
+                        (isRootNode ? [] : parentNode.index).concat(index),
                     );
-                    this.$set(normalized, "parentNode", parentNode);
-                    this.$set(normalized, "lowerCased", lowerCased);
-                    this.$set(
-                        normalized,
-                        "nestedSearchLabel",
-                        nestedSearchLabel
-                    );
-                    this.$set(normalized, "isDisabled", isDisabled);
-                    this.$set(normalized, "isNew", isNew);
-                    this.$set(normalized, "isMatched", false);
-                    this.$set(normalized, "isHighlighted", false);
-                    this.$set(normalized, "isBranch", isBranch);
-                    this.$set(normalized, "isHidden", isHidden);
-                    this.$set(normalized, "isLeaf", isLeaf);
-                    this.$set(normalized, "isRootNode", isRootNode);
-                    this.$set(normalized, "raw", raw);
+                    this.$set(normalized, 'parentNode', parentNode);
+                    this.$set(normalized, 'lowerCased', lowerCased);
+                    this.$set(normalized, 'nestedSearchLabel', nestedSearchLabel);
+                    this.$set(normalized, 'isDisabled', isDisabled);
+                    this.$set(normalized, 'isNew', isNew);
+                    this.$set(normalized, 'isMatched', false);
+                    this.$set(normalized, 'isHighlighted', false);
+                    this.$set(normalized, 'isBranch', isBranch);
+                    this.$set(normalized, 'isHidden', isHidden);
+                    this.$set(normalized, 'isLeaf', isLeaf);
+                    this.$set(normalized, 'isRootNode', isRootNode);
+                    this.$set(normalized, 'raw', raw);
 
                     if (isBranch) {
                         const isLoaded = Array.isArray(children);
 
-                        this.$set(normalized, "childrenStates", {
+                        this.$set(normalized, 'childrenStates', {
                             ...createAsyncOptionsStates(),
                             isLoaded,
                         });
                         this.$set(
                             normalized,
-                            "isExpanded",
-                            typeof isDefaultExpanded === "boolean"
+                            'isExpanded',
+                            typeof isDefaultExpanded === 'boolean'
                                 ? isDefaultExpanded
-                                : level < this.defaultExpandLevel
+                                : level < this.defaultExpandLevel,
                         );
-                        this.$set(normalized, "hasMatchedDescendants", false);
-                        this.$set(normalized, "hasDisabledDescendants", false);
-                        this.$set(normalized, "isExpandedOnSearch", false);
-                        this.$set(normalized, "showAllChildrenOnSearch", false);
-                        this.$set(normalized, "count", {
+                        this.$set(normalized, 'hasMatchedDescendants', false);
+                        this.$set(normalized, 'hasDisabledDescendants', false);
+                        this.$set(normalized, 'isExpandedOnSearch', false);
+                        this.$set(normalized, 'showAllChildrenOnSearch', false);
+                        this.$set(normalized, 'count', {
                             [ALL_CHILDREN]: 0,
                             [ALL_DESCENDANTS]: 0,
                             [LEAF_CHILDREN]: 0,
@@ -1758,14 +1680,8 @@ export default {
                         });
                         this.$set(
                             normalized,
-                            "children",
-                            isLoaded
-                                ? this.normalize(
-                                      normalized,
-                                      children,
-                                      prevNodeMap
-                                  )
-                                : []
+                            'children',
+                            isLoaded ? this.normalize(normalized, children, prevNodeMap) : [],
                         );
 
                         if (isDefaultExpanded === true)
@@ -1773,32 +1689,26 @@ export default {
                                 ancestor.isExpanded = true;
                             });
 
-                        if (
-                            !isLoaded &&
-                            typeof this.loadOptions !== "function"
-                        ) {
+                        if (!isLoaded && typeof this.loadOptions !== 'function') {
                             warning(
                                 () => false,
                                 () =>
-                                    'Unloaded branch node detected. "loadOptions" prop is required to load its children.'
+                                    'Unloaded branch node detected. "loadOptions" prop is required to load its children.',
                             );
                         } else if (!isLoaded && normalized.isExpanded) {
                             this.loadChildrenOptions(normalized);
                         }
                     }
 
-                    normalized.ancestors.forEach(
-                        (ancestor) => ancestor.count[ALL_DESCENDANTS]++
-                    );
+                    normalized.ancestors.forEach((ancestor) => ancestor.count[ALL_DESCENDANTS]++);
                     if (isLeaf)
                         normalized.ancestors.forEach(
-                            (ancestor) => ancestor.count[LEAF_DESCENDANTS]++
+                            (ancestor) => ancestor.count[LEAF_DESCENDANTS]++,
                         );
                     if (!isRootNode) {
                         parentNode.count[ALL_CHILDREN] += 1;
                         if (isLeaf) parentNode.count[LEAF_CHILDREN] += 1;
-                        if (isDisabled)
-                            parentNode.hasDisabledDescendants = true;
+                        if (isDisabled) parentNode.hasDisabledDescendants = true;
                     }
 
                     // Preserve previous states.
@@ -1806,14 +1716,12 @@ export default {
                         const prev = prevNodeMap[id];
 
                         normalized.isMatched = prev.isMatched;
-                        normalized.showAllChildrenOnSearch =
-                            prev.showAllChildrenOnSearch;
+                        normalized.showAllChildrenOnSearch = prev.showAllChildrenOnSearch;
                         normalized.isHighlighted = prev.isHighlighted;
 
                         if (prev.isBranch && normalized.isBranch) {
                             normalized.isExpanded = prev.isExpanded;
-                            normalized.isExpandedOnSearch =
-                                prev.isExpandedOnSearch;
+                            normalized.isExpandedOnSearch = prev.isExpandedOnSearch;
                             // #97
                             // If `isLoaded` was true, but IS NOT now, we consider this branch node
                             // to be reset to unloaded state by the user of this component.
@@ -1837,12 +1745,8 @@ export default {
                 });
 
             if (this.branchNodesFirst) {
-                const branchNodes = normalizedOptions.filter(
-                    (option) => option.isBranch
-                );
-                const leafNodes = normalizedOptions.filter(
-                    (option) => option.isLeaf
-                );
+                const branchNodes = normalizedOptions.filter((option) => option.isBranch);
+                const leafNodes = normalizedOptions.filter((option) => option.isLeaf);
                 normalizedOptions = branchNodes.concat(leafNodes);
             }
 
@@ -1857,7 +1761,7 @@ export default {
                 },
                 start: () => {
                     this.rootOptionsStates.isLoading = true;
-                    this.rootOptionsStates.loadingError = "";
+                    this.rootOptionsStates.loadingError = '';
                 },
                 succeed: () => {
                     this.rootOptionsStates.isLoaded = true;
@@ -1895,14 +1799,13 @@ export default {
                 },
                 start: () => {
                     this.getNode(id).childrenStates.isLoading = true;
-                    this.getNode(id).childrenStates.loadingError = "";
+                    this.getNode(id).childrenStates.loadingError = '';
                 },
                 succeed: () => {
                     this.getNode(id).childrenStates.isLoaded = true;
                 },
                 fail: (err) => {
-                    this.getNode(id).childrenStates.loadingError =
-                        getErrorMessage(err);
+                    this.getNode(id).childrenStates.loadingError = getErrorMessage(err);
                 },
                 end: () => {
                     this.getNode(id).childrenStates.isLoading = false;
@@ -1910,15 +1813,7 @@ export default {
             });
         },
 
-        callLoadOptionsProp({
-            action,
-            args,
-            isPending,
-            start,
-            succeed,
-            fail,
-            end,
-        }) {
+        callLoadOptionsProp({ action, args, isPending, start, succeed, fail, end }) {
             if (!this.loadOptions || isPending()) {
                 return;
             }
@@ -1950,7 +1845,7 @@ export default {
                         },
                         (err) => {
                             callback(err);
-                        }
+                        },
                     )
                     .catch((err) => {
                         // istanbul ignore next
@@ -1967,12 +1862,10 @@ export default {
                         !this.forest.nodeMap[node.id].isFallbackNode
                     ),
                 () =>
-                    `Detected duplicate presence of node id ${JSON.stringify(
-                        node.id
-                    )}. ` +
-                    `Their labels are "${
-                        this.forest.nodeMap[node.id].label
-                    }" and "${node.label}" respectively.`
+                    `Detected duplicate presence of node id ${JSON.stringify(node.id)}. ` +
+                    `Their labels are "${this.forest.nodeMap[node.id].label}" and "${
+                        node.label
+                    }" respectively.`,
             );
         },
 
@@ -1980,8 +1873,8 @@ export default {
             warning(
                 () => !(node.children === undefined && node.isBranch === true),
                 () =>
-                    "Are you meant to declare an unloaded branch node? " +
-                    "`isBranch: true` is no longer supported, please use `children: null` instead."
+                    'Are you meant to declare an unloaded branch node? ' +
+                    '`isBranch: true` is no longer supported, please use `children: null` instead.',
             );
         },
 
@@ -2008,16 +1901,12 @@ export default {
             this.buildForestState();
 
             if (nextState) {
-                this.$emit("select", node.raw, this.getInstanceId());
+                this.$emit('select', node.raw, this.getInstanceId());
             } else {
-                this.$emit("deselect", node.raw, this.getInstanceId());
+                this.$emit('deselect', node.raw, this.getInstanceId());
             }
 
-            if (
-                this.localSearch.active &&
-                nextState &&
-                (this.single || this.clearOnSelect)
-            ) {
+            if (this.localSearch.active && nextState && (this.single || this.clearOnSelect)) {
                 this.resetSearchQuery();
             }
 
@@ -2036,10 +1925,9 @@ export default {
                 if (this.single || this.allowClearingDisabled) {
                     this.forest.selectedNodeIds = [];
                 } /* if (this.multiple && !this.allowClearingDisabled) */ else {
-                    this.forest.selectedNodeIds =
-                        this.forest.selectedNodeIds.filter(
-                            (nodeId) => this.getNode(nodeId).isDisabled
-                        );
+                    this.forest.selectedNodeIds = this.forest.selectedNodeIds.filter(
+                        (nodeId) => this.getNode(nodeId).isDisabled,
+                    );
                 }
 
                 this.buildForestState();
@@ -2062,10 +1950,7 @@ export default {
                     });
                 } else if (this.autoSelectDescendants) {
                     this.traverseDescendantsBFS(node, (descendant) => {
-                        if (
-                            !this.isSelected(descendant) &&
-                            !descendant.isDisabled
-                        )
+                        if (!this.isSelected(descendant) && !descendant.isDisabled)
                             this.addValue(descendant);
                     });
                 }
@@ -2083,10 +1968,7 @@ export default {
 
             if (node.isBranch) {
                 this.traverseDescendantsBFS(node, (descendant) => {
-                    if (
-                        !descendant.isDisabled ||
-                        this.allowSelectingDisabledDescendants
-                    ) {
+                    if (!descendant.isDisabled || this.allowSelectingDisabledDescendants) {
                         this.addValue(descendant);
                     }
                 });
@@ -2095,8 +1977,7 @@ export default {
             if (isFullyChecked) {
                 let curr = node;
                 while ((curr = curr.parentNode) !== NO_PARENT_NODE) {
-                    if (curr.children.every(this.isSelected))
-                        this.addValue(curr);
+                    if (curr.children.every(this.isSelected)) this.addValue(curr);
                     else break;
                 }
             }
@@ -2118,10 +1999,7 @@ export default {
                     });
                 } else if (this.autoDeselectDescendants) {
                     this.traverseDescendantsBFS(node, (descendant) => {
-                        if (
-                            this.isSelected(descendant) &&
-                            !descendant.isDisabled
-                        )
+                        if (this.isSelected(descendant) && !descendant.isDisabled)
                             this.removeValue(descendant);
                     });
                 }
@@ -2132,10 +2010,7 @@ export default {
             let hasUncheckedSomeDescendants = false;
             if (node.isBranch) {
                 this.traverseDescendantsDFS(node, (descendant) => {
-                    if (
-                        !descendant.isDisabled ||
-                        this.allowSelectingDisabledDescendants
-                    ) {
+                    if (!descendant.isDisabled || this.allowSelectingDisabledDescendants) {
                         this.removeValue(descendant);
                         hasUncheckedSomeDescendants = true;
                     }
@@ -2195,8 +2070,7 @@ export default {
 
     mounted() {
         if (this.autoFocus) this.focusInput();
-        if (!this.options && !this.async && this.autoLoadRootOptions)
-            this.loadRootOptions();
+        if (!this.options && !this.async && this.autoLoadRootOptions) this.loadRootOptions();
         if (this.alwaysOpen) this.openMenu();
         if (this.async && this.defaultOptions) this.handleRemoteSearch();
     },
