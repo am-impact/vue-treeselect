@@ -1475,13 +1475,13 @@ export default {
             // }
         },
 
-        highlightFirstOption() {
-            if (!this.hasVisibleOptions) return;
+        // highlightFirstOption() {
+        //     if (!this.hasVisibleOptions) return;
 
-            const first = this.visibleOptionIds[0];
+        //     const first = this.visibleOptionIds[0];
 
-            this.setCurrentHighlightedOption(this.getNode(first));
-        },
+        //     this.setCurrentHighlightedOption(this.getNode(first));
+        // },
 
         highlightPrevOption() {
             if (!this.hasVisibleOptions) return;
