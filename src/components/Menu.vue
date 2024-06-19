@@ -55,7 +55,7 @@ export default {
         if (instance.menu.isOpen) this.$nextTick(this.onMenuOpen);
     },
 
-    destroyed() {
+    unmounted() {
         this.onMenuClose();
     },
 
@@ -104,7 +104,10 @@ export default {
                 return this.renderLoadingOptionsTip();
             } else if (instance.rootOptionsStates.loadingError) {
                 return this.renderLoadingRootOptionsErrorTip();
-            } else if (instance.rootOptionsStates.isLoaded && instance.forest.normalizedOptions.length === 0) {
+            } else if (
+                instance.rootOptionsStates.isLoaded &&
+                instance.forest.normalizedOptions.length === 0
+            ) {
                 return this.renderNoAvailableOptionsTip();
             } else {
                 return this.renderOptionList();
@@ -118,7 +121,10 @@ export default {
                 return this.renderLoadingOptionsTip();
             } else if (instance.rootOptionsStates.loadingError) {
                 return this.renderLoadingRootOptionsErrorTip();
-            } else if (instance.rootOptionsStates.isLoaded && instance.forest.normalizedOptions.length === 0) {
+            } else if (
+                instance.rootOptionsStates.isLoaded &&
+                instance.forest.normalizedOptions.length === 0
+            ) {
                 return this.renderNoAvailableOptionsTip();
             } else if (instance.localSearch.noResults) {
                 return this.renderNoResultsTip();
@@ -130,7 +136,8 @@ export default {
         renderAsyncSearchMenuInner() {
             const { instance } = this;
             const entry = instance.getRemoteSearchEntry();
-            const shouldShowSearchPromptTip = instance.trigger.searchQuery === '' && !instance.defaultOptions;
+            const shouldShowSearchPromptTip =
+                instance.trigger.searchQuery === '' && !instance.defaultOptions;
             const shouldShowNoResultsTip = shouldShowSearchPromptTip
                 ? false
                 : entry.isLoaded && entry.options.length === 0;
@@ -154,7 +161,10 @@ export default {
             return (
                 <div class="vue-treeselect__list">
                     {instance.forest.normalizedOptions.map((rootNode) => (
-                        <Option node={rootNode} key={rootNode.id} />
+                        <Option
+                            node={rootNode}
+                            key={rootNode.id}
+                        />
                     ))}
                 </div>
             );
@@ -164,7 +174,10 @@ export default {
             const { instance } = this;
 
             return (
-                <Tip type="search-prompt" icon="warning">
+                <Tip
+                    type="search-prompt"
+                    icon="warning"
+                >
                     {instance.searchPromptText}
                 </Tip>
             );
@@ -174,7 +187,10 @@ export default {
             const { instance } = this;
 
             return (
-                <Tip type="loading" icon="loader">
+                <Tip
+                    type="loading"
+                    icon="loader"
+                >
                     {instance.loadingText}
                 </Tip>
             );
@@ -184,9 +200,16 @@ export default {
             const { instance } = this;
 
             return (
-                <Tip type="error" icon="error">
+                <Tip
+                    type="error"
+                    icon="error"
+                >
                     {instance.rootOptionsStates.loadingError}
-                    <a class="vue-treeselect__retry" onClick={instance.loadRootOptions} title={instance.retryTitle}>
+                    <a
+                        class="vue-treeselect__retry"
+                        onClick={instance.loadRootOptions}
+                        title={instance.retryTitle}
+                    >
                         {instance.retryText}
                     </a>
                 </Tip>
@@ -200,9 +223,16 @@ export default {
             // TODO: retryTitle?
 
             return (
-                <Tip type="error" icon="error">
+                <Tip
+                    type="error"
+                    icon="error"
+                >
                     {entry.loadingError}
-                    <a class="vue-treeselect__retry" onClick={instance.handleRemoteSearch} title={instance.retryTitle}>
+                    <a
+                        class="vue-treeselect__retry"
+                        onClick={instance.handleRemoteSearch}
+                        title={instance.retryTitle}
+                    >
                         {instance.retryText}
                     </a>
                 </Tip>
@@ -213,7 +243,10 @@ export default {
             const { instance } = this;
 
             return (
-                <Tip type="no-options" icon="warning">
+                <Tip
+                    type="no-options"
+                    icon="warning"
+                >
                     {instance.noOptionsText}
                 </Tip>
             );
@@ -223,7 +256,10 @@ export default {
             const { instance } = this;
 
             return (
-                <Tip type="no-results" icon="warning">
+                <Tip
+                    type="no-results"
+                    icon="warning"
+                >
                     {instance.noResultsText}
                 </Tip>
             );

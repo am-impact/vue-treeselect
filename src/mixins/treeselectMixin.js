@@ -621,7 +621,7 @@ export default {
          * For most cases, just use `v-model` instead.
          * @type {?Array}
          */
-        value: null,
+        modelValue: null,
 
         /**
          * Which kind of nodes should be included in the `value` array in multi-select mode.
@@ -868,7 +868,7 @@ export default {
             // #122
             // Vue would trigger this watcher when `newValue` and `oldValue` are shallow-equal.
             // We emit the `input` event only when the value actually changes.
-            if (hasChanged) this.$emit('input', this.getValue(), this.getInstanceId());
+            if (hasChanged) this.$emit('update:modelValue', this.getValue(), this.getInstanceId());
         },
 
         matchKeys() {
@@ -1032,13 +1032,13 @@ export default {
         },
 
         extractCheckedNodeIdsFromValue() {
-            if (this.value == null) return [];
+            if (this.modelValue == null) return [];
 
             if (this.valueFormat === 'id') {
-                return this.multiple ? this.value.slice() : [this.value];
+                return this.multiple ? this.modelValue.slice() : [this.modelValue];
             }
 
-            return (this.multiple ? this.value : [this.value])
+            return (this.multiple ? this.modelValue : [this.modelValue])
                 .map((node) => this.enhancedNormalizer(node))
                 .map((node) => node.id);
         },
@@ -1051,11 +1051,11 @@ export default {
             }
 
             const valueArray = this.multiple
-                ? Array.isArray(this.value)
-                    ? this.value
+                ? Array.isArray(this.modelValue)
+                    ? this.modelValue
                     : []
-                : this.value
-                ? [this.value]
+                : this.modelValue
+                ? [this.modelValue]
                 : [];
             const matched = find(
                 valueArray,
@@ -2075,7 +2075,7 @@ export default {
         if (this.async && this.defaultOptions) this.handleRemoteSearch();
     },
 
-    destroyed() {
+    unmounted() {
         // istanbul ignore next
         this.toggleClickOutsideEvent(false);
     },
