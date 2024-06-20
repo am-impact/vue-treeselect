@@ -28,6 +28,13 @@ export default defineComponent({
     name: 'vue-treeselect',
     mixins: [treeselectMixin],
 
+    components: {
+        HiddenFields,
+        Control,
+        Menu,
+        MenuPortal,
+    },
+
     computed: {
         wrapperClass() {
             return {

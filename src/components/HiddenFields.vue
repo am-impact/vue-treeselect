@@ -1,8 +1,10 @@
 <template>
     <div v-if="instance.name && !instance.disabled && instance.hasValue">
-        <template v-for="(stringifiedValue, i) in processedValues">
+        <template
+            v-for="(stringifiedValue, i) in processedValues"
+            :key="'hidden-field-' + i"
+        >
             <input
-                :key="'hidden-field-' + i"
                 type="hidden"
                 :name="instance.name"
                 :value="stringifiedValue"
