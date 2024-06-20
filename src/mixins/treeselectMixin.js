@@ -15,7 +15,7 @@ import {
     includes,
     find,
     removeFromArray,
-} from '../utils';
+} from './../utils/index.js';
 
 import {
     NO_PARENT_NODE,
@@ -36,7 +36,7 @@ import {
     ORDER_SELECTED,
     LEVEL,
     INDEX,
-} from '../constants';
+} from './../constants.js';
 
 function sortValueByIndex(a, b) {
     let i = 0;

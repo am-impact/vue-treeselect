@@ -3,7 +3,8 @@
         ref="wrapper"
         :class="wrapperClass"
     >
-        <HiddenFields />
+        aaaa
+        <!-- <HiddenFields />
         <Control ref="control" />
         <MenuPortal
             v-if="appendToBody"
@@ -12,27 +13,27 @@
         <Menu
             v-else
             ref="menu"
-        />
+        /> -->
     </div>
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+// import { defineComponent } from 'vue';
 import treeselectMixin from '../mixins/treeselectMixin.js';
-import HiddenFields from './HiddenFields.vue';
-import Control from './Control.vue';
-import Menu from './Menu.vue';
-import MenuPortal from './MenuPortal.vue';
+// import HiddenFields from './HiddenFields.vue';
+// import Control from './Control.vue';
+// import Menu from './Menu.vue';
+// import MenuPortal from './MenuPortal.vue';
 
-export default defineComponent({
+export default {
     name: 'vue-treeselect',
     mixins: [treeselectMixin],
 
     components: {
-        HiddenFields,
-        Control,
-        Menu,
-        MenuPortal,
+        // HiddenFields,
+        // Control,
+        // Menu,
+        // MenuPortal,
     },
 
     computed: {
@@ -53,5 +54,5 @@ export default defineComponent({
             };
         },
     },
-});
+};
 </script>
