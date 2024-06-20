@@ -17,13 +17,14 @@
 </template>
 
 <script>
+import { defineComponent } from 'vue';
 import treeselectMixin from '../mixins/treeselectMixin.js';
 import HiddenFields from './HiddenFields.vue';
 import Control from './Control.vue';
 import Menu from './Menu.vue';
 import MenuPortal from './MenuPortal.vue';
 
-export default {
+export default defineComponent({
     name: 'vue-treeselect',
     mixins: [treeselectMixin],
 
@@ -45,5 +46,5 @@ export default {
             };
         },
     },
-};
+});
 </script>

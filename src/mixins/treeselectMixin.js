@@ -1036,7 +1036,11 @@ export default {
             if (this.modelValue == null) return [];
 
             if (this.valueFormat === 'id') {
-                return this.multiple ? this.modelValue.slice() : [this.modelValue];
+                return this.multiple
+                    ? Array.isArray(this.modelValue)
+                        ? this.modelValue.slice()
+                        : this.modelValue
+                    : [this.modelValue];
             }
 
             return (this.multiple ? this.modelValue : [this.modelValue])
