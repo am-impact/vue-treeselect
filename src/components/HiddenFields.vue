@@ -1,37 +1,37 @@
+<template>
+    <div v-if="instance.name && !instance.disabled && instance.hasValue">
+        <template v-for="(stringifiedValue, i) in processedValues">
+            <input
+                :key="'hidden-field-' + i"
+                type="hidden"
+                :name="instance.name"
+                :value="stringifiedValue"
+            />
+        </template>
+    </div>
+</template>
+
 <script>
-  import { isNaN } from '../utils'
+import { isNaN } from '../utils/index.js';
+import { defineComponent } from 'vue';
 
-  function stringifyValue(value) {
-    if (typeof value === 'string') return value
-    // istanbul ignore else
-    if (value != null && !isNaN(value)) return JSON.stringify(value)
-    // istanbul ignore next
-    return ''
-  }
+function stringifyValue(value) {
+    if (typeof value === 'string') return value;
+    if (value != null && !isNaN(value)) return JSON.stringify(value);
+    return '';
+}
 
-  export default {
+export default defineComponent({
     name: 'vue-treeselect--hidden-fields',
-    inject: [ 'instance' ],
-    functional: true,
-
-    render(_, context) {
-      const { instance } = context.injections
-
-      if (!instance.name || instance.disabled || !instance.hasValue) return null
-
-      let stringifiedValues = instance.internalValue.map(stringifyValue)
-
-      if (instance.multiple && instance.joinValues) stringifiedValues = [
-        stringifiedValues.join(instance.delimiter),
-      ]
-
-      return stringifiedValues.map((stringifiedValue, i) => (
-        <input type="hidden"
-          name={instance.name}
-          value={stringifiedValue}
-          key={'hidden-field-' + i}
-        />
-      ))
+    inject: ['instance'],
+    computed: {
+        processedValues() {
+            let stringifiedValues = this.instance.internalValue.map(stringifyValue);
+            if (this.instance.multiple && this.instance.joinValues) {
+                stringifiedValues = [stringifiedValues.join(this.instance.delimiter)];
+            }
+            return stringifiedValues;
+        },
     },
-  }
+});
 </script>

@@ -45,7 +45,11 @@ const Option = {
             };
 
             return (
-                <div class={optionClass} onMouseenter={this.handleMouseEnterOption} data-id={node.id}>
+                <div
+                    class={optionClass}
+                    onMouseenter={this.handleMouseEnterOption}
+                    data-id={node.id}
+                >
                     {this.renderArrow()}
                     {this.renderLabelContainer([
                         this.renderCheckboxContainer([this.renderCheckbox()]),
@@ -86,7 +90,10 @@ const Option = {
                 };
 
                 return (
-                    <div class="vue-treeselect__option-arrow-container" onMousedown={this.handleMouseDownOnArrow}>
+                    <div
+                        class="vue-treeselect__option-arrow-container"
+                        onMousedown={this.handleMouseDownOnArrow}
+                    >
                         <transition {...transitionProps}>
                             <ArrowIcon class={arrowClass} />
                         </transition>
@@ -99,7 +106,9 @@ const Option = {
             // non-tree select).
             if (/*node.isLeaf && */ instance.hasBranchNodes) {
                 if (!arrowPlaceholder)
-                    arrowPlaceholder = <div class="vue-treeselect__option-arrow-placeholder">&nbsp;</div>;
+                    arrowPlaceholder = (
+                        <div class="vue-treeselect__option-arrow-placeholder">&nbsp;</div>
+                    );
 
                 return arrowPlaceholder;
             }
@@ -109,7 +118,10 @@ const Option = {
 
         renderLabelContainer(children) {
             return (
-                <label class="vue-treeselect__label-container" onMousedown={this.handleMouseDownOnLabelContainer}>
+                <label
+                    class="vue-treeselect__label-container"
+                    onMousedown={this.handleMouseDownOnLabelContainer}
+                >
                     {children}
                 </label>
             );
@@ -139,7 +151,11 @@ const Option = {
             if (!minusMark) minusMark = <span class="vue-treeselect__minus-mark" />;
 
             return (
-                <span class={checkboxClass} aria-checked={checkedState === CHECKED ? 'true' : 'false'} role="checkbox">
+                <span
+                    class={checkboxClass}
+                    aria-checked={checkedState === CHECKED ? 'true' : 'false'}
+                    role="checkbox"
+                >
                     {checkMark}
                     {minusMark}
                 </span>
@@ -150,7 +166,9 @@ const Option = {
             const { instance, node } = this;
             const shouldShowCount =
                 node.isBranch &&
-                (instance.localSearch.active ? instance.showCountOnSearchComputed : instance.showCount);
+                (instance.localSearch.active
+                    ? instance.showCountOnSearchComputed
+                    : instance.showCount);
             const count = shouldShowCount
                 ? instance.localSearch.active
                     ? instance.localSearch.countMap[node.id][instance.showCountOf]
@@ -158,7 +176,7 @@ const Option = {
                 : NaN;
             const labelClassName = 'vue-treeselect__label';
             const countClassName = 'vue-treeselect__count';
-            const customLabelRenderer = instance.$scopedSlots['option-label'];
+            const customLabelRenderer = instance.$slots['option-label'];
 
             if (customLabelRenderer)
                 return customLabelRenderer({
@@ -182,7 +200,12 @@ const Option = {
 
             if (!node.childrenStates.isLoaded) return null;
 
-            return node.children.map((childNode) => <Option node={childNode} key={childNode.id} />);
+            return node.children.map((childNode) => (
+                <Option
+                    node={childNode}
+                    key={childNode.id}
+                />
+            ));
         },
 
         renderNoChildrenTip() {
@@ -191,7 +214,10 @@ const Option = {
             if (!node.childrenStates.isLoaded || node.children.length) return null;
 
             return (
-                <Tip type="no-children" icon="warning">
+                <Tip
+                    type="no-children"
+                    icon="warning"
+                >
                     {instance.noChildrenText}
                 </Tip>
             );
@@ -203,7 +229,10 @@ const Option = {
             if (!node.childrenStates.isLoading) return null;
 
             return (
-                <Tip type="loading" icon="loader">
+                <Tip
+                    type="loading"
+                    icon="loader"
+                >
                     {instance.loadingText}
                 </Tip>
             );
@@ -215,7 +244,10 @@ const Option = {
             if (!node.childrenStates.loadingError) return null;
 
             return (
-                <Tip type="error" icon="error">
+                <Tip
+                    type="error"
+                    icon="error"
+                >
                     {node.childrenStates.loadingError}
                     <a
                         class="vue-treeselect__retry"
@@ -275,9 +307,14 @@ const Option = {
         };
 
         return (
-            <div role="option" class={listItemClass}>
+            <div
+                role="option"
+                class={listItemClass}
+            >
                 {this.renderOption()}
-                {node.isBranch && <transition {...transitionProps}>{this.renderSubOptionsList()}</transition>}
+                {node.isBranch && (
+                    <transition {...transitionProps}>{this.renderSubOptionsList()}</transition>
+                )}
             </div>
         );
     },

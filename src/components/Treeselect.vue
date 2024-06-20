@@ -17,11 +17,11 @@
 </template>
 
 <script>
-import treeselectMixin from '../mixins/treeselectMixin';
-import HiddenFields from './HiddenFields';
-import Control from './Control';
-import Menu from './Menu';
-import MenuPortal from './MenuPortal';
+import treeselectMixin from '../mixins/treeselectMixin.js';
+import HiddenFields from './HiddenFields.vue';
+import Control from './Control.vue';
+import Menu from './Menu.vue';
+import MenuPortal from './MenuPortal.vue';
 
 export default {
     name: 'vue-treeselect',

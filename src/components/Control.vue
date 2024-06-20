@@ -1,13 +1,13 @@
 <script>
-import { onLeftClick, isPromise } from "../utils";
-import SingleValue from "./SingleValue";
-import MultiValue from "./MultiValue";
-import DeleteIcon from "./icons/Delete";
-import ArrowIcon from "./icons/Arrow";
+import { onLeftClick, isPromise } from './../utils/index.js';
+import SingleValue from './SingleValue.vue';
+import MultiValue from './MultiValue.vue';
+import DeleteIcon from './icons/Delete.vue';
+import ArrowIcon from './icons/Arrow.vue';
 
 export default {
-    name: "vue-treeselect--control",
-    inject: ["instance"],
+    name: 'vue-treeselect--control',
+    inject: ['instance'],
 
     computed: {
         /* eslint-disable valid-jsdoc */
@@ -48,9 +48,7 @@ export default {
 
             return (
                 instance.hasValue &&
-                instance.internalValue.some(
-                    (id) => !instance.getNode(id).isDisabled
-                )
+                instance.internalValue.some((id) => !instance.getNode(id).isDisabled)
             );
         },
         /* eslint-enable valid-jsdoc */
@@ -59,9 +57,7 @@ export default {
     methods: {
         renderX() {
             const { instance } = this;
-            const title = instance.multiple
-                ? instance.clearAllText
-                : instance.clearValueText;
+            const title = instance.multiple ? instance.clearAllText : instance.clearValueText;
 
             if (!this.shouldShowX) return null;
 
@@ -79,8 +75,8 @@ export default {
         renderArrow() {
             const { instance } = this;
             const arrowClass = {
-                "vue-treeselect__control-arrow": true,
-                "vue-treeselect__control-arrow--rotated": instance.menu.isOpen,
+                'vue-treeselect__control-arrow': true,
+                'vue-treeselect__control-arrow--rotated': instance.menu.isOpen,
             };
 
             if (!this.shouldShowArrow) return null;
@@ -127,9 +123,7 @@ export default {
             }
         }),
 
-        handleMouseDownOnArrow: onLeftClick(function handleMouseDownOnArrow(
-            evt
-        ) {
+        handleMouseDownOnArrow: onLeftClick(function handleMouseDownOnArrow(evt) {
             evt.preventDefault();
             evt.stopPropagation();
 
@@ -142,9 +136,7 @@ export default {
 
         // This is meant to be called by child `<Value />` component.
         renderValueContainer(children) {
-            return (
-                <div class="vue-treeselect__value-container">{children}</div>
-            );
+            return <div class="vue-treeselect__value-container">{children}</div>;
         },
     },
 

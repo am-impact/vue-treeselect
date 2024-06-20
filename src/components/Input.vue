@@ -1,6 +1,6 @@
 <script>
-import { debounce, deepExtend, includes } from '../utils';
-import { MIN_INPUT_WIDTH, KEY_CODES, INPUT_DEBOUNCE_DELAY } from '../constants';
+import { debounce, deepExtend, includes } from '../utils/index.js';
+import { MIN_INPUT_WIDTH, KEY_CODES, INPUT_DEBOUNCE_DELAY } from '../constants.js';
 
 const keysThatRequireMenuBeingOpen = [
     KEY_CODES.ENTER,
@@ -247,8 +247,14 @@ export default {
             }
 
             return (
-                <div class="vue-treeselect__input-container" {...props}>
-                    <label for={`vue-treeselect-input-${instance.instanceId}`} class="visuallyhidden">
+                <div
+                    class="vue-treeselect__input-container"
+                    {...props}
+                >
+                    <label
+                        for={`vue-treeselect-input-${instance.instanceId}`}
+                        class="visuallyhidden"
+                    >
                         {instance.placeholder}
                     </label>
                     {children}
@@ -285,7 +291,10 @@ export default {
 
         renderSizer() {
             return (
-                <div ref="sizer" class="vue-treeselect__sizer">
+                <div
+                    ref="sizer"
+                    class="vue-treeselect__sizer"
+                >
                     {this.value}
                 </div>
             );

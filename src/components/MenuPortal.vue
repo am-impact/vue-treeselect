@@ -1,7 +1,7 @@
 <script>
-import Vue from 'vue';
-import { watchSize, setupResizeAndScrollEventListeners, find } from '../utils';
-import Menu from './Menu';
+import { createApp } from 'vue';
+import { watchSize, setupResizeAndScrollEventListeners, find } from './../utils/index.js';
+import Menu from './Menu.vue';
 
 const PortalTarget = {
     name: 'vue-treeselect--portal-target',
@@ -164,11 +164,11 @@ export default {
             const el = document.createElement('div');
             document.body.appendChild(el);
 
-            this.portalTarget = new Vue({
-                el,
+            this.portalTarget = createApp({
                 parent: this,
                 ...PortalTarget,
             });
+            this.portalTarget.mount(el);
         },
 
         teardown() {

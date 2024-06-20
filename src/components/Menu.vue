@@ -76,8 +76,8 @@ export default {
                     {instance.async
                         ? this.renderAsyncSearchMenuInner()
                         : instance.localSearch.active
-                        ? this.renderLocalSearchMenuInner()
-                        : this.renderNormalMenuInner()}
+                          ? this.renderLocalSearchMenuInner()
+                          : this.renderNormalMenuInner()}
                     {this.renderAfterList()}
                 </div>
             );
@@ -85,14 +85,14 @@ export default {
 
         renderBeforeList() {
             const { instance } = this;
-            const beforeListRenderer = instance.$scopedSlots['before-list'];
+            const beforeListRenderer = instance.$slots['before-list'];
 
             return beforeListRenderer ? beforeListRenderer() : null;
         },
 
         renderAfterList() {
             const { instance } = this;
-            const afterListRenderer = instance.$scopedSlots['after-list'];
+            const afterListRenderer = instance.$slots['after-list'];
 
             return afterListRenderer ? afterListRenderer() : null;
         },
