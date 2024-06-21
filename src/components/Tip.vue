@@ -1,8 +1,17 @@
+<template>
+    <div :class="wrapperClass">
+        <div class="vue-treeselect__icon-container">
+            <span :class="iconClass" />
+        </div>
+        <span :class="labelClass">
+            <slot />
+        </span>
+    </div>
+</template>
+
 <script>
-import { defineComponent } from 'vue';
-export default defineComponent({
+export default {
     name: 'vue-treeselect--tip',
-    functional: true,
 
     props: {
         type: {
@@ -15,19 +24,26 @@ export default defineComponent({
         },
     },
 
-    render(context) {
-        const { type, icon } = this;
+    computed: {
+        iconClass() {
+            return {
+                [`vue-treeselect__icon-${this.icon}`]: true,
+            };
+        },
 
-        return (
-            <div class={`vue-treeselect__tip vue-treeselect__${type}-tip`}>
-                <div class="vue-treeselect__icon-container">
-                    <span class={`vue-treeselect__icon-${icon}`} />
-                </div>
-                <span class={`vue-treeselect__tip-text vue-treeselect__${type}-tip-text`}>
-                    {this.$slots.default()}
-                </span>
-            </div>
-        );
+        labelClass() {
+            return {
+                'vue-treeselect__tip-text': true,
+                [`vue-treeselect__${this.type}-tip-text`]: true,
+            };
+        },
+
+        wrapperClass() {
+            return {
+                'vue-treeselect__tip': true,
+                [`vue-treeselect__${this.type}-tip`]: true,
+            };
+        },
     },
-});
+};
 </script>
