@@ -10,5 +10,3 @@ export {
     LOAD_CHILDREN_OPTIONS,
     ASYNC_SEARCH,
 } from './constants';
-
-export const VERSION = PKG_VERSION;
