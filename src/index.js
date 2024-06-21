@@ -1,6 +1,6 @@
 import Treeselect from './components/Treeselect.vue';
 import treeselectMixin from './mixins/treeselectMixin.js';
-import './style.less';
+import '../styles/style.less';
 
 export default Treeselect;
 export { Treeselect, treeselectMixin };
