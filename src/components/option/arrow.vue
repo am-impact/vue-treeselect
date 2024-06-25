@@ -38,17 +38,11 @@ export default {
      * Props
      */
     props: {
+        // The node object
         node: {
             type: Object,
             required: true,
         },
-    },
-
-    /**
-     * State
-     */
-    data() {
-        return {};
     },
 
     /**
@@ -68,26 +62,12 @@ export default {
     },
 
     /**
-     * Watch
-     */
-    watch: {
-        // propName: function(newVal, oldVal) {},
-    },
-
-    /**
-     * Created
-     */
-    created() {},
-
-    /**
-     * Mounted
-     */
-    mounted() {},
-
-    /**
      * Methods
      */
     methods: {
+        /**
+         * Handle mouse down on arrow
+         */
         handleMouseDownOnArrow: onLeftClick(function handleMouseDownOnOptionArrow() {
             this.instance.toggleExpanded(this.node);
         }),

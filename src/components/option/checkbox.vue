@@ -20,6 +20,7 @@ export default {
      * Props
      */
     props: {
+        // The node object
         node: {
             type: Object,
             required: true,
@@ -54,7 +55,7 @@ export default {
          * Checked state
          */
         checkedState() {
-            return this.instance.forest.checkedStateMap[node.id];
+            return this.instance.forest.checkedStateMap[this.node.id];
         },
     },
 

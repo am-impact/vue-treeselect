@@ -5,7 +5,7 @@
             v-if="shouldShowCount"
             :class="optionLabelProps?.countClassName"
         >
-            ({count})
+            ({{ count }})
         </span>
     </span>
 </template>
@@ -19,6 +19,7 @@ export default {
      * Props
      */
     props: {
+        // The option label props
         optionLabelProps: {
             type: Object,
             required: true,

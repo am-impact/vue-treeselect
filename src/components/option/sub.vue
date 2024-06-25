@@ -31,11 +31,7 @@
             <a
                 class="vue-treeselect__retry"
                 :title="instance.retryTitle"
-                @mousedown="
-                    {
-                        this.handleMouseDownOnRetry;
-                    }
-                "
+                @mousedown="handleMouseDownOnRetry"
             >
                 {{ instance.retryText }}
             </a>
