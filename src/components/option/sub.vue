@@ -31,7 +31,7 @@
             <a
                 class="vue-treeselect__retry"
                 :title="instance.retryTitle"
-                @mousedown="handleMouseDownOnRetry"
+                @click="handleMouseDownOnRetry"
             >
                 {{ instance.retryText }}
             </a>
@@ -42,7 +42,6 @@
 <script>
 import TreeselectOption from './index.vue';
 import TreeselectTip from './../Tip.vue';
-import { onLeftClick } from './../../utils/index.js';
 
 export default {
     name: 'vue-treeselect--sub',
@@ -104,11 +103,12 @@ export default {
         /**
          * Mouse down on retry
          */
-        handleMouseDownOnRetry: onLeftClick(function handleMouseDownOnRetry() {
+        handleMouseDownOnRetry(e) {
+            e.preventDefault();
             const { instance, node } = this;
 
             instance.loadChildrenOptions(node);
-        }),
+        },
     },
 };
 </script>

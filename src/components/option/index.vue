@@ -15,7 +15,7 @@
 
             <label
                 class="vue-treeselect__label-container"
-                @mousedown="handleMouseDownOnLabelContainer"
+                @click="handleMouseDownOnLabelContainer"
             >
                 <div
                     v-if="!instance.single || (instance.disableBranchNodes && node.isBranch)"
@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import { onLeftClick } from './../../utils/index.js';
 import OptionArrow from './arrow.vue';
 import OptionCheckbox from './checkbox.vue';
 import OptionLabel from './label.vue';
@@ -188,7 +187,7 @@ export default {
         /**
          * Click op label container
          */
-        handleMouseDownOnLabelContainer: onLeftClick(function handleMouseDownOnLabelContainer() {
+        handleMouseDownOnLabelContainer() {
             const { instance, node } = this;
 
             if (node.isBranch && instance.disableBranchNodes) {
@@ -196,7 +195,7 @@ export default {
             } else {
                 instance.select(node);
             }
-        }),
+        },
     },
 };
 </script>

@@ -2,7 +2,7 @@
     <div
         v-if="node.isBranch"
         class="vue-treeselect__option-arrow-container"
-        @mouseover="handleMouseDownOnArrow"
+        @click="handleMouseDownOnArrow"
     >
         <Transition
             name="vue-treeselect__option-arrow--prepare"
@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import { onLeftClick } from './../../utils/index.js';
 import ArrowIcon from './../icons/Arrow';
 
 export default {
@@ -68,9 +67,10 @@ export default {
         /**
          * Handle mouse down on arrow
          */
-        handleMouseDownOnArrow: onLeftClick(function handleMouseDownOnOptionArrow() {
+        handleMouseDownOnArrow() {
+            console.log('handleMouseDownOnArrow');
             this.instance.toggleExpanded(this.node);
-        }),
+        },
     },
 };
 </script>
