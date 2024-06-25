@@ -107,7 +107,7 @@ export default {
                 'vue-treeselect__option': true,
                 'vue-treeselect__option--disabled': this.node.isDisabled,
                 'vue-treeselect__option--hidden': this.node.isHidden,
-                'vue-treeselect__option--selected': instance.isSelected(this.node),
+                'vue-treeselect__option--selected': this.instance.isSelected(this.node),
                 'vue-treeselect__option--highlight': this.node.isHighlighted,
                 'vue-treeselect__option--matched':
                     this.instance.localSearch.active && this.node.isMatched,
@@ -161,6 +161,8 @@ export default {
          * Uitklap arrow tonen?
          */
         showArrow() {
+            const { instance } = this;
+
             return !(instance.shouldFlattenOptions && this.shouldShow);
         },
     },
