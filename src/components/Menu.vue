@@ -1,7 +1,7 @@
 <script>
 import { MENU_BUFFER } from '../constants';
 import { watchSize, setupResizeAndScrollEventListeners } from '../utils';
-import Option from './Option';
+import Option from './option/index.vue';
 import Tip from './Tip';
 
 const directionMap = {
@@ -76,8 +76,8 @@ export default {
                     {instance.async
                         ? this.renderAsyncSearchMenuInner()
                         : instance.localSearch.active
-                          ? this.renderLocalSearchMenuInner()
-                          : this.renderNormalMenuInner()}
+                        ? this.renderLocalSearchMenuInner()
+                        : this.renderNormalMenuInner()}
                     {this.renderAfterList()}
                 </div>
             );
